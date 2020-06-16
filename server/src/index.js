@@ -1,31 +1,25 @@
 const express = require('express');
-const config = require('./config');
 const routes = require('./routes');
-const mongooseClient = require('./loaders/mongoose');
+const serverLoader = require('./loaders/server');
+const dbLoader = require('./loaders/mongoose');
 
-// Destruct the needed values from the config.
-const { port, address } = config.server;
-
-const startServer = (port, address) => {
+const launchApp = async () => {
     try {
-        // Init express.
-        const app = express();
+        const server = await serverLoader();
 
-        // Listen on server.
-        app.listen(port, address, () => {
-            console.log(`Server listening at ${address}:${port}`);
-            return true;
-        });
-
-        // Connect to the mongoose client.
-        mongooseClient();
+        // Use middleware.
+        server.use(express.urlencoded({ extended: true }));
+        server.use(express.json());
 
         // Import the routes.
-        app.use(routes);
+        server.use(routes);
+
+        // Connect to the database.
+        await dbLoader();
     }
-    catch (err) {
-        throw new Error(`Error when attempting to start server: ${err}`);
+    catch (err) { 
+        throw new Error(`Error starting app: ${err}`);
     }
 }
 
-startServer(port, address);
+launchApp();
