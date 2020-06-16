@@ -1,6 +1,10 @@
 const express = require('express');
-const {port, address} = require('./config').server;
+const config = require('./config');
 const routes = require('./routes');
+const mongooseClient = require('./loaders/mongoose');
+
+// Destruct the needed values from the config.
+const { port, address } = config.server;
 
 const startServer = (port, address) => {
     try {
@@ -12,7 +16,10 @@ const startServer = (port, address) => {
             console.log(`Server listening at ${address}:${port}`);
             return true;
         });
-        
+
+        // Connect to the mongoose client.
+        mongooseClient();
+
         // Import the routes.
         app.use(routes);
     }
