@@ -3,7 +3,7 @@ const routes = require('./routes');
 const serverLoader = require('./loaders/server');
 const dbLoader = require('./loaders/mongoose');
 
-const launchApp = async () => {
+const app = async () => {
     try {
         const server = await serverLoader();
 
@@ -16,10 +16,14 @@ const launchApp = async () => {
 
         // Connect to the database.
         await dbLoader();
+
+        return server;
     }
     catch (err) { 
         throw new Error(`Error starting app: ${err}`);
     }
 }
 
-launchApp();
+app();
+    
+module.exports = app;
