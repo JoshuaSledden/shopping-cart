@@ -1,6 +1,7 @@
 const assert = require('chai').assert;
+process.env.NODE_ENV = 'test';
 
-const config = require('../src/config')
+let config = require('../src/config')
 
 describe('Validate config variables', () => {
     it('Server Address is valid', () => {
