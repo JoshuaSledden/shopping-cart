@@ -1,5 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
+const cors = require('cors');
 const serverLoader = require('./loaders/server');
 const dbLoader = require('./loaders/mongoose');
 
@@ -8,6 +9,7 @@ const app = async () => {
         const server = await serverLoader();
 
         // Use middleware.
+        server.use(cors())
         server.use(express.urlencoded({ extended: true }));
         server.use(express.json());
 
