@@ -23,3 +23,26 @@ nav {
   color: white;
   text-decoration: none;
 }
+
+.product {
+  width: 200px;
+  float: left;
+}
+
+.product a {
+  color: black;
+  text-decoration: none;
+}
+
+.product button {
+}
+
+.product ul li {
+  margin-bottom: 10px;
+  list-style: none;
+}
+
+.product img {
+  max-height: 150px;
+  max-width: 100px;
+}

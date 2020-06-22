@@ -30,6 +30,7 @@ router.post('/', async (req, res) => {
     const product = new Product({
         title: req.body.title,
         description: req.body.description,
+        image: req.body.image,
         price: req.body.price
     });
     
@@ -62,6 +63,7 @@ router.patch('/:productID', async (req, res) => {
                 $set: {
                     title: req.body.title,
                     description: req.body.description,
+                    image: req.body.image,
                     price: req.body.price
                 }
             }
@@ -83,6 +85,7 @@ router.put('/:productID', async (req, res) => {
                 $set: {
                     title: req.body.title,
                     description: req.body.description,
+                    image: req.body.image,
                     price: req.body.price
                 }
             }

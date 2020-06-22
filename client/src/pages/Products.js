@@ -21,12 +21,20 @@ function Products() {
     <div>
       <h1>Products Page</h1>
       {products.map(product => (
-        <p key={product._id}>
-          <Link to={`/products/${product._id}`}>
-          {product.title}        
-          </Link>
-          - {product.price}
-        </p>
+        <div className="product">
+          <ul>
+            <li>
+              <Link to={`/products/${product._id}`}>{product.title}</Link>
+            </li>
+            <li>
+              <Link to={`/products/${product._id}`}><img src={product.image} /></Link> 
+            </li>
+            <hr />
+            <li>
+              <button>+ £{product.price}</button>
+            </li>
+          </ul>        
+        </div>
       ))}
     </div>
   );
